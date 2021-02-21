@@ -22,7 +22,7 @@ class TypeFormat {
     static #formatMimeTypeAudio = '(wav|wave|ogg|mpeg|aac|midi|x-flac)'
     static #formatMimeTypeVideo = '(webm|ogg|mp4|mpeg|quicktime|x-msvideo)'
     */
-    static #formatFloat = `${this.#formatIntBase10}?\.[0-9]+`
+    static #formatFloat = `${this.#formatIntBase10}?\\.[0-9]+`
     static #formatBigInt = '[0-9]+n'
     static #regexpIntBase10 = new RegExp(`^${this.#formatIntBase10}$`);
     static #regexpIntBase2 = new RegExp(`^${this.#formatIntBase2}$`);
@@ -53,7 +53,10 @@ class TypeFormat {
               || value.match(this.#regexpIntBase16)
               || value.match(this.#regexpIntBase32)
               || value.match(this.#regexpIntBase36)) {
-            return 'integer'; // 実際はNumber型。isSafeInteger()判定しても超過していたときはどうしようもない。BigIntは基数表現できないから。
+//            return 'integer'; // 実際はNumber型。isSafeInteger()判定しても超過していたときはどうしようもない。BigIntは基数表現できないから。
+            if (Number.isSafeInteger(parseInt(value))) { return 'integer'; } // 実際はNumber型
+            else { return 'bigint'; }
+
         }
         else if (value.match(this.#regexpBase64)) { return 'base64'; } // 実際はString型
 //        else if (Number.isSafeInteger(parseInt(value))) { return 'integer'; }

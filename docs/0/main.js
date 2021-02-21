@@ -9,7 +9,6 @@ window.addEventListener('load', (event) => {
     testString();
     console.log('Finished assert !!');
     console.assert('integer' === TypeFormat.typeof('0'));
-    console.assert('number' === TypeFormat.typeof('0'));
     function testLiteral() {
         console.assert('undefined' === TypeFormat.typeof(undefined));
         console.assert('null' === TypeFormat.typeof(null));
@@ -26,6 +25,7 @@ window.addEventListener('load', (event) => {
 //        console.assert('integer' === TypeFormat.typeof('0.0'));
 //        console.assert('integer' === TypeFormat.typeof('-0.0'));
         console.assert('integer' === TypeFormat.typeof('0xFF'));
+        console.log(TypeFormat.typeof('0o777'))
         console.assert('integer' === TypeFormat.typeof('0o777'));
         console.assert('integer' === TypeFormat.typeof('0b101'));
 //        console.assert('integer' === TypeFormat.typeof('2e1')); // 2 * 10^1 = 20
@@ -38,8 +38,11 @@ window.addEventListener('load', (event) => {
     function testBigInt() {
         console.assert('bigint' === TypeFormat.typeof((2**53).toString()));
         console.assert('bigint' === TypeFormat.typeof('9007199254740991n'));
-        console.assert('bigint' === TypeFormat.typeof('0x1fffffffffffff'));
-        console.assert('bigint' === TypeFormat.typeof('0b11111111111111111111111111111111111111111111111111111'));
+//        console.log(TypeFormat.typeof('0x1fffffffffffff'));
+//        console.log(TypeFormat.typeof('0x1ffffffffffffff'));
+//        console.log(TypeFormat.typeof('0b11111111111111111111111111111111111111111111111111111'));
+        console.assert('bigint' === TypeFormat.typeof('0x1ffffffffffffff'));
+//        console.assert('bigint' === TypeFormat.typeof('0b11111111111111111111111111111111111111111111111111111'));
     }
     function testFloat() {
         console.assert('float' === TypeFormat.typeof('.0'));
