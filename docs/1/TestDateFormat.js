@@ -52,8 +52,13 @@ class TestDateFormat {
         console.assert(new Date(Date.parse(`${yearUTC}-${monthUTC}-${dayUTC}T00:00:00Z`)).getTime() === DateFormat.toType('00:00:00.000').getTime());
         const tzJa = '+0900'
         DateFormat.setTimeZone(tzJa);
-//        console.assert(new Date('2000-01-01T00:00:00+0900').getTime() === DateFormat.toType('2000-01-01').getTime());
         console.assert(new Date(Date.parse(`${year}-${month}-${day}T00:00:00${tzJa}`)).getTime() === DateFormat.toType('00:00').getTime());
+        console.assert(new Date(Date.parse(`${year}-${month}-${day}T00:00:00${tzJa}`)).getTime() === DateFormat.toType('00:00:00').getTime());
+        console.assert(new Date(Date.parse(`${year}-${month}-${day}T00:00:00${tzJa}`)).getTime() === DateFormat.toType('00:00:00.000').getTime());
+        console.assert(new Date(Date.parse(`2000-01-01T00:00:00${tzJa}`)).getTime() === DateFormat.toType('2000-01-01').getTime());
+        console.assert(new Date(Date.parse(`2000-01-01T00:00:00${tzJa}`)).getTime() === DateFormat.toType('2000-01-01 00:00').getTime());
+        console.assert(new Date(Date.parse(`2000-01-01T00:00:00${tzJa}`)).getTime() === DateFormat.toType('2000-01-01 00:00:00').getTime());
+        console.assert(new Date(Date.parse(`2000-01-01T00:00:00${tzJa}`)).getTime() === DateFormat.toType('2000-01-01 00:00:00.000').getTime());
         DateFormat.setTimeZone('Z');
     }
 }
