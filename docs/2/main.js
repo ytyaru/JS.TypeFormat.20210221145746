@@ -1,4 +1,5 @@
 window.addEventListener('load', (event) => {
+    TestNumber.test();
     TestDateFormat.test();
     testLiteral();
     testBoolean();
