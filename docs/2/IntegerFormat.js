@@ -1,4 +1,4 @@
-class NumberFormat {
+class IntegerFormat {
     static #formatBase10 = '[+\-]?([0-9]{1}|[1-9][0-9]+)'
     static #formatBase8 = '0o[0-7]+'
     static #formatBase2 = '0b[01]+'
@@ -16,12 +16,6 @@ class NumberFormat {
     static #regexpBase64 = new RegExp(`^${this.#formatBase64}$`);
     static #regexpFloat = new RegExp(`^${this.#formatFloat}$`);
     static #regexpBigInt = new RegExp(`^${this.#formatBigInt}$`);
-    static typeof(value) { // value:string
-        if (this.isMatch(value)) {
-            if (Number.isSafeInteger(parseInt(value))) { return 'integer'; }
-            else { return 'bigint'; }
-        } else if (FloatFormat.isMatch(value)) { return 'float'; }
-    }
     static isMatch(value) { // value:string
         const base = this.getBase(value);
         if (undefined === base) { return false; }
