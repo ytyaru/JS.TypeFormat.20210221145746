@@ -1,7 +1,7 @@
 class DateFormat {
     static #timeZone = 'Z'
     static #formatDate = '\\d{4,}[\-/]\\d{2}[\-/]\\d{2}';
-    static #formatTime = '\\d{2}:\\d{2}:\\d{2}(\.\\d+)?';
+    static #formatTime = '\\d{2}:\\d{2}(:\\d{2}(\.\\d+)?)?';
     static #formatTimeZone = '(Z|[+\-]\\d{4}|[+\-]\\d{2}:\\d{2})';
     static #formatDateTime = `${this.#formatDate}[ T]${this.#formatTime}${this.#formatTimeZone}?`;
     static #regexpDate = new RegExp(`^${this.#formatDate}$`);
@@ -13,21 +13,42 @@ class DateFormat {
              || value.match(this.#regexpTime) 
              || value.match(this.#regexpDateTime)) ? true : false;
     }
-    static convert(value) { // value:string
+    static getTimeZone(value) { return this.#timeZone; }
+    static setTimeZone(value) {
+        if (value.match(this.#formatTimeZone)) {
+            this.#timeZone = value;
+        }
+    }
+    static toType(value) { // value:string
         if (value.match(this.#formatDateTime)) {
             if (this.#hasTimeZone(value)) { return new Date(Date.parse(value)); }
             else { return new Date(Date.parse(value + this.#timeZone)); }
         }
         else if (value.match(this.#formatDate)) {
-            return new Date(Date.parse(value + '00:00:00' + this.#timeZone));
+            return new Date(Date.parse(value + 'T00:00:00' + this.#timeZone));
         }
         else if (value.match(this.#formatTime)) {
-            throw new Error(`00:00:00書式は非対応です。: ${value}`);
+//            throw new Error(`00:00:00書式は非対応です。: ${value}`);
 //            const now = new Date(); // 現在日時
             // #timeZone === 'Z' のときは UTC日付
             // #timeZone === '+0900' 等のときは Locale日付
             // それらタイムゾーンごとの日付文字列を取得する方法がわからない
 //            return new Date(Date.parse(現在日yyyy-mm-dd + value + this.#timeZone));
+            const now = new Date(); // 現在日時
+            if ('Z' === this.#timeZone) {
+                const year = `${now.getUTCFullYear()}`;
+                const month = `0${now.getUTCMonth()+1}`.slice(-2);
+                const day = `0${now.getUTCDate()}`.slice(-2);
+                console.log('UTC', `${year}-${month}-${day}T${value}${this.#timeZone}`, new Date(Date.parse(`${year}-${month}-${day}T${value}${this.#timeZone}`)));
+                return new Date(Date.parse(`${year}-${month}-${day}T${value}${this.#timeZone}`));
+                
+            } else {
+                const year = `${now.getFullYear()}`;
+                const month = `0${now.getMonth()+1}`.slice(-2);
+                const day = `0${now.getDate()}`.slice(-2);
+                console.log('Locale', `${year}-${month}-${day}T${value}${this.#timeZone}`);
+                return new Date(Date.parse(`${year}-${month}-${day}T${value}${this.#timeZone}`));
+            }
         }
         throw new Error(`非対応の書式です。: ${value}`);
     }
