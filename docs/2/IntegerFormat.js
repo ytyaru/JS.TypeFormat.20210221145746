@@ -1,5 +1,5 @@
 class IntegerFormat {
-    static #formatBase10 = '[+\-]?([0-9]{1}|[1-9][0-9]+)'
+    static #formatBase10 = '[\-]?([0-9]{1}|[1-9][0-9]+)'
     static #formatBase8 = '0o[0-7]+'
     static #formatBase2 = '0b[01]+'
     static #formatBase16 = '0x[0-9a-fA-F]+'
