@@ -28,6 +28,17 @@ class BigIntFormat {
         else { return undefined; }
     }
     static toType(value) { // value:string
-        return new BigInt(value);
+        if (IntegerFormat.isMatch(value) && !Number.isSafeInteger(parseInt(value))) { return BigInt(value); }
+        else if (this.isMatch(value)) { return BigInt(value.slice(0, -1)); }
+        else { return undefined; }
+//        if (value.endsWith('n')) { return BigInt(value.slice(0, -1)); }
+//        return BigInt(value);
+        /*
+        if (BigIntFormat.isMatch(value)) {
+//            console.log('--------', value);
+            if (value.endsWith('n')) { return BigInt(value.slice(0, -1)); }
+            return BigInt(value);
+        } else { return undefined; }
+        */
     }
 }

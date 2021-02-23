@@ -31,6 +31,8 @@ class TestBigInt {
         console.assert(1n === BigInt('1'));
         console.assert(0n !== BigInt('1'));
         console.assert(-1n === BigInt('-1'));
+//        console.assert(1n === BigInt('1n')); // SyntaxError: Cannot convert 1n to a BigInt
+        console.assert(9007199254740991n === BigInt('9007199254740991'));
 //        console.assert(0.1 === BigInt('0.1'));
 //        console.assert(-0.1 === BigInt('-0.1'));
 //        console.assert(12.3 === BigInt('123e-1')); // 指数 SyntaxError: Cannot convert 123e-1 to a BigInt
