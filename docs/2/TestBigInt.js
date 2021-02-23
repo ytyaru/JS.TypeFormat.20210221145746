@@ -23,8 +23,8 @@ class TestBigInt {
 //        console.assert(1230n === BigInt('123e1')); // 指数 SyntaxError: Cannot convert 123e1 to a BigInt
     }
     static #testNewInfinity() {
-        console.assert(Infinity === BigInt('Infinity'));
-        console.assert(-Infinity === BigInt('-Infinity'));
+//        console.assert(Infinity === BigInt('Infinity')); // SyntaxError: Cannot convert Infinity to a BigInt
+//        console.assert(-Infinity === BigInt('-Infinity')); // SyntaxError: Cannot convert -Infinity to a BigInt
     }
     static #testNew() {
         console.assert(0n === BigInt('0'));
