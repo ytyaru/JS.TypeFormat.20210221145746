@@ -22,14 +22,12 @@ window.addEventListener('load', (event) => {
         console.assert('boolean' === TypeFormat.typeof('false'));
     }
     function testInteger() {
-        console.log(TypeFormat.typeof('0'));
         console.assert('integer' === TypeFormat.typeof('0'));
         console.assert('integer' === TypeFormat.typeof('123'));
         console.assert('integer' === TypeFormat.typeof('-1'));
 //        console.assert('integer' === TypeFormat.typeof('0.0'));
 //        console.assert('integer' === TypeFormat.typeof('-0.0'));
         console.assert('integer' === TypeFormat.typeof('0xFF'));
-        console.log(TypeFormat.typeof('0o777'))
         console.assert('integer' === TypeFormat.typeof('0o777'));
         console.assert('integer' === TypeFormat.typeof('0b101'));
 //        console.assert('integer' === TypeFormat.typeof('2e1')); // 2 * 10^1 = 20
@@ -40,7 +38,6 @@ window.addEventListener('load', (event) => {
         console.assert('integer' === TypeFormat.typeof((2**53-1).toString()));
     }
     function testBigInt() {
-        console.log(TypeFormat.typeof((2**53).toString()));
         console.assert('bigint' === TypeFormat.typeof((2**53).toString()));
         console.assert('bigint' === TypeFormat.typeof('9007199254740991n'));
 //        console.log(TypeFormat.typeof('0x1fffffffffffff'));

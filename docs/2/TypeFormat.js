@@ -48,6 +48,7 @@ class TypeFormat {
             return 'bigint';
         }
         else if (FloatFormat.isMatch(value)) { return 'float'; }
+        else if (BigIntFormat.isMatch(value)) { return 'bigint'; }
         /*
         else if (IntegerFormat.isMatch(value)) {
             if (Number.isSafeInteger(parseInt(value))) { return 'number'; }
