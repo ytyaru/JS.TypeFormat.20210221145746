@@ -43,6 +43,19 @@ class TypeFormat {
 //        else if (isNaN(value)) { return 'NaN'; }
         else if (DateFormat.isMatch(value)) { return 'date'; }
 //        else if (value.match(this.#regexpDate) || value.match(this.#regexpTime) || value.match(this.#regexpDateTime) ) { return 'date'; }
+        else if (IntegerFormat.isMatch(value)) {
+            if (Number.isSafeInteger(parseInt(value))) { return 'integer'; }
+            return 'bigint';
+        }
+        else if (FloatFormat.isMatch(value)) { return 'float'; }
+        /*
+        else if (IntegerFormat.isMatch(value)) {
+            if (Number.isSafeInteger(parseInt(value))) { return 'number'; }
+            return 'bigint';
+        }
+        else if (FloatFormat.isMatch(value)) { return 'number'; }
+        */
+        /*
         else if (value.match(this.#regexpIntBase10)) {
             if (Number.isSafeInteger(parseInt(value))) { return 'integer'; } // 実際はNumber型
             else { return 'bigint'; }
@@ -59,6 +72,7 @@ class TypeFormat {
             else { return 'bigint'; }
 
         }
+        */
         else if (value.match(this.#regexpBase64)) { return 'base64'; } // 実際はString型
 //        else if (Number.isSafeInteger(parseInt(value))) { return 'integer'; }
 //        else if (Number.isFinite(parseInt(value)) || Number.isFinite(parseFloat(value)) ) { return 'number'; }

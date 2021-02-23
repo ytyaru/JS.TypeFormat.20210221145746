@@ -15,6 +15,9 @@ class BigIntFormat {
     static #regexpBase64 = new RegExp(`^${this.#formatBase64}$`);
     static #regexpFloat = new RegExp(`^${this.#formatFloat}$`);
     static #regexpBigInt = new RegExp(`^${this.#formatBigInt}$`);
+
+    static isMatch(value) { // value:string
+    }
     // Infinity, NaN, 2e1 等はいらない
     static typeof(value) {
 //        console.log(value);

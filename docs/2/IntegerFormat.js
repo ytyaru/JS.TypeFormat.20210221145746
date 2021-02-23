@@ -13,14 +13,15 @@ class IntegerFormat {
     static #regexpBase16 = new RegExp(`^${this.#formatBase16}$`);
     static #regexpBase32 = new RegExp(`^${this.#formatBase32}$`);
     static #regexpBase36 = new RegExp(`^${this.#formatBase36}$`);
-    static #regexpBase64 = new RegExp(`^${this.#formatBase64}$`);
-    static #regexpFloat = new RegExp(`^${this.#formatFloat}$`);
-    static #regexpBigInt = new RegExp(`^${this.#formatBigInt}$`);
+//    static #regexpBase64 = new RegExp(`^${this.#formatBase64}$`);
+//    static #regexpFloat = new RegExp(`^${this.#formatFloat}$`);
+//    static #regexpBigInt = new RegExp(`^${this.#formatBigInt}$`);
     static isMatch(value) { // value:string
         const base = this.getBase(value);
         if (undefined === base) { return false; }
-        if (Number.isSafeInteger(parseInt(value))) { return true; }
-        return false;
+//        if (Number.isSafeInteger(parseInt(value))) { return true; }
+//        return false;
+        return true;
     }
     static toType(value) { // value:string
         return parseInt(value) || parseFloat(value);

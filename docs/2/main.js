@@ -1,5 +1,6 @@
 window.addEventListener('load', (event) => {
     TestNumber.test();
+    TestBigInt.test();
     TestDateFormat.test();
     testLiteral();
     testBoolean();
@@ -21,6 +22,7 @@ window.addEventListener('load', (event) => {
         console.assert('boolean' === TypeFormat.typeof('false'));
     }
     function testInteger() {
+        console.log(TypeFormat.typeof('0'));
         console.assert('integer' === TypeFormat.typeof('0'));
         console.assert('integer' === TypeFormat.typeof('123'));
         console.assert('integer' === TypeFormat.typeof('-1'));
@@ -38,6 +40,7 @@ window.addEventListener('load', (event) => {
         console.assert('integer' === TypeFormat.typeof((2**53-1).toString()));
     }
     function testBigInt() {
+        console.log(TypeFormat.typeof((2**53).toString()));
         console.assert('bigint' === TypeFormat.typeof((2**53).toString()));
         console.assert('bigint' === TypeFormat.typeof('9007199254740991n'));
 //        console.log(TypeFormat.typeof('0x1fffffffffffff'));
