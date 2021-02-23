@@ -1,65 +1,51 @@
-class TestNumberFormat {
+class TestIntegerFormat {
     static test() {
         this.#testIsMatch();
-        this.#testGetTimeZone();
+        this.#testIsMatchFalse();
         this.#testToType();
+        this.#testGetBase();
     }
     static #testIsMatch() {
-        console.assert(true === NumberFormat.isMatch('2000-01-01'));
-        console.assert(true === NumberFormat.isMatch('2000/01/01'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01 12:34'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01 12:34:56'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01 12:34:56.789'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34Z'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34:56Z'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34:56.789Z'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34:56+0900'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34:56+09:00'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34:56-1200'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34:56-12:00'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34:56.789+0900'));
-        console.assert(true === NumberFormat.isMatch('2000-01-01T12:34:56.789+09:00'));
-        console.assert(true === NumberFormat.isMatch('12:34'));
-        console.assert(true === NumberFormat.isMatch('12:34:56'));
-        console.assert(true === NumberFormat.isMatch('12:34:56.789'));
+        console.assert(true === IntegerFormat.isMatch('0'));
+        console.assert(true === IntegerFormat.isMatch('1'));
+        console.assert(true === IntegerFormat.isMatch('-1'));
+        console.assert(true === IntegerFormat.isMatch('123'));
+        console.assert(true === IntegerFormat.isMatch('0xFF'));
+        console.assert(true === IntegerFormat.isMatch('0o777'));
+        console.assert(true === IntegerFormat.isMatch('0b101'));
+        console.assert(true === IntegerFormat.isMatch(Number.MAX_SAFE_INTEGER.toString()));
+        console.assert(true === IntegerFormat.isMatch(Number.MIN_SAFE_INTEGER.toString()));
+        console.assert(true === IntegerFormat.isMatch((2**53-1).toString()));
     }
-    static #testGetTimeZone() {
-        console.assert('Z' === NumberFormat.getTimeZone());
-        NumberFormat.setTimeZone('+0900');
-        console.assert('+0900' === NumberFormat.getTimeZone());
-        NumberFormat.setTimeZone('-12:00');
-        console.assert('-12:00' === NumberFormat.getTimeZone());
-        NumberFormat.setTimeZone('Invalid Value');
-        console.assert('-12:00' === NumberFormat.getTimeZone());
-        NumberFormat.setTimeZone('Z');
-        console.assert('Z' === NumberFormat.getTimeZone());
+    static #testIsMatchFalse() {
+        console.assert(false === IntegerFormat.isMatch('2e1')); // 2 * 10^1 = 20
+        console.assert(false === IntegerFormat.isMatch('NaN'));
+        console.assert(false === IntegerFormat.isMatch('Infinity'));
     }
     static #testToType() {
-        console.assert(new Date('2000-01-01T00:00:00Z').getTime() === NumberFormat.toType('2000-01-01').getTime());
-        console.assert(new Date('2000-01-01T00:00:00Z').getTime() === NumberFormat.toType('2000-01-01 00:00').getTime());
-        console.assert(new Date('2000-01-01T00:00:00Z').getTime() === NumberFormat.toType('2000-01-01 00:00:00').getTime());
-        console.assert(new Date('2000-01-01T00:00:00Z').getTime() === NumberFormat.toType('2000-01-01 00:00:00.000').getTime());
-        console.assert(new Date('2000-01-01T00:00:00Z').getTime() === NumberFormat.toType('2000-01-01T00:00:00Z').getTime());
-        console.assert(new Date('2000-01-01T00:00:00Z').getTime() === NumberFormat.toType('2000-01-01T00:00:00.000Z').getTime());
-        const now = new Date(); // 現在日時
-        const yearUTC = `${now.getUTCFullYear()}`;
-        const monthUTC = `0${now.getUTCMonth()+1}`.slice(-2);
-        const dayUTC = `0${now.getUTCDate()}`.slice(-2);
-        const year = `${now.getFullYear()}`;
-        const month = `0${now.getMonth()+1}`.slice(-2);
-        const day = `0${now.getDate()}`.slice(-2);
-        console.assert(new Date(Date.parse(`${yearUTC}-${monthUTC}-${dayUTC}T00:00:00Z`)).getTime() === NumberFormat.toType('00:00').getTime());
-        console.assert(new Date(Date.parse(`${yearUTC}-${monthUTC}-${dayUTC}T00:00:00Z`)).getTime() === NumberFormat.toType('00:00:00').getTime());
-        console.assert(new Date(Date.parse(`${yearUTC}-${monthUTC}-${dayUTC}T00:00:00Z`)).getTime() === NumberFormat.toType('00:00:00.000').getTime());
-        const tzJa = '+0900'
-        NumberFormat.setTimeZone(tzJa);
-        console.assert(new Date(Date.parse(`${year}-${month}-${day}T00:00:00${tzJa}`)).getTime() === NumberFormat.toType('00:00').getTime());
-        console.assert(new Date(Date.parse(`${year}-${month}-${day}T00:00:00${tzJa}`)).getTime() === NumberFormat.toType('00:00:00').getTime());
-        console.assert(new Date(Date.parse(`${year}-${month}-${day}T00:00:00${tzJa}`)).getTime() === NumberFormat.toType('00:00:00.000').getTime());
-        console.assert(new Date(Date.parse(`2000-01-01T00:00:00${tzJa}`)).getTime() === NumberFormat.toType('2000-01-01').getTime());
-        console.assert(new Date(Date.parse(`2000-01-01T00:00:00${tzJa}`)).getTime() === NumberFormat.toType('2000-01-01 00:00').getTime());
-        console.assert(new Date(Date.parse(`2000-01-01T00:00:00${tzJa}`)).getTime() === NumberFormat.toType('2000-01-01 00:00:00').getTime());
-        console.assert(new Date(Date.parse(`2000-01-01T00:00:00${tzJa}`)).getTime() === NumberFormat.toType('2000-01-01 00:00:00.000').getTime());
-        NumberFormat.setTimeZone('Z');
+        console.assert(0 === IntegerFormat.toType('0'));
+        console.assert(1 === IntegerFormat.toType('1'));
+        console.assert(-1 === IntegerFormat.toType('-1'));
+        console.assert(123 === IntegerFormat.toType('123'));
+        console.assert(0xFF === IntegerFormat.toType('0xFF'));
+        console.log(IntegerFormat.toType('0o777'))
+        console.log(IntegerFormat.toType('0b101'))
+        console.assert(0o777 === IntegerFormat.toType('0o777'));
+        console.assert(0b101 === IntegerFormat.toType('0b101'));
+        console.assert(Number.MAX_SAFE_INTEGER === IntegerFormat.toType(Number.MAX_SAFE_INTEGER.toString()));
+        console.assert(Number.MIN_SAFE_INTEGER === IntegerFormat.toType(Number.MIN_SAFE_INTEGER.toString()));
+        console.assert((2**53-1) === IntegerFormat.toType((2**53-1).toString()));
+    }
+    static #testGetBase() {
+        console.assert(10 === IntegerFormat.getBase('0'));
+        console.assert(10 === IntegerFormat.getBase('1'));
+        console.assert(10 === IntegerFormat.getBase('-1'));
+        console.assert(10 === IntegerFormat.getBase('123'));
+        console.assert(16 === IntegerFormat.getBase('0xFF'));
+        console.assert(8 === IntegerFormat.getBase('0o777'));
+        console.assert(2 === IntegerFormat.getBase('0b101'));
+        console.assert(10 === IntegerFormat.getBase(Number.MAX_SAFE_INTEGER.toString()));
+        console.assert(10 === IntegerFormat.getBase(Number.MIN_SAFE_INTEGER.toString()));
+        console.assert(10 === IntegerFormat.getBase((2**53-1).toString()));
     }
 }

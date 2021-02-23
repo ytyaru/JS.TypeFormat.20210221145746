@@ -15,6 +15,8 @@ class Base64Format {
         return false;
     }
     static toType(value) {
-        return btoa(value);
+//        return btoa(value);
+//        return atob(value);
+        return value;
     }
 }

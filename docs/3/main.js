@@ -2,6 +2,8 @@ window.addEventListener('load', (event) => {
     TestNumber.test();
     TestBigInt.test();
     TestBase64.test();
+    TestIntegerFormat.test();
+    TestFloatFormat.test();
     TestDateFormat.test();
     testLiteral();
     testBoolean();

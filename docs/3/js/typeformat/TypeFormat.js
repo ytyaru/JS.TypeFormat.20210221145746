@@ -14,7 +14,7 @@ class TypeFormat {
         }
         else if (FloatFormat.isMatch(value)) { return 'float'; }
         else if (BigIntFormat.isMatch(value)) { return 'bigint'; }
-        else if (value.match(this.#regexpBase64)) { return 'base64'; } // 実際はString型
+        else if (Base64Format.isMatch(value)) { return 'base64'; } // 実際はString型
         else { return 'string'; }
     }
 }
