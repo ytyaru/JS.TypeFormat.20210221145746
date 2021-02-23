@@ -28,8 +28,6 @@ class TestIntegerFormat {
         console.assert(-1 === IntegerFormat.toType('-1'));
         console.assert(123 === IntegerFormat.toType('123'));
         console.assert(0xFF === IntegerFormat.toType('0xFF'));
-        console.log(IntegerFormat.toType('0o777'))
-        console.log(IntegerFormat.toType('0b101'))
         console.assert(0o777 === IntegerFormat.toType('0o777'));
         console.assert(0b101 === IntegerFormat.toType('0b101'));
         console.assert(Number.MAX_SAFE_INTEGER === IntegerFormat.toType(Number.MAX_SAFE_INTEGER.toString()));
