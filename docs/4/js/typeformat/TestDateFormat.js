@@ -1,4 +1,5 @@
-class TestDateFormat {
+import DateFormat from './DateFormat.js';
+export default class TestDateFormat {
     static test() {
         this.#testIsMatch();
         this.#testGetTimeZone();

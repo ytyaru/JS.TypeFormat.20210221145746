@@ -1,4 +1,4 @@
-class TestBigInt {
+export default class TestBigInt {
     static test() {
         this.#testNew();
         this.#testNewZero();

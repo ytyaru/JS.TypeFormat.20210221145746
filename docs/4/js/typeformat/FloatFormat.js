@@ -1,4 +1,4 @@
-class FloatFormat {
+export default class FloatFormat {
     static #formatBase10 = '[\-]?([0-9]{1}|[1-9][0-9]+)'
     static #formatFloat = `${this.#formatBase10}?\\.[0-9]+`
     static #regexpFloat = new RegExp(`^${this.#formatFloat}$`);

@@ -1,4 +1,4 @@
-class Base64Format {
+export default class Base64Format {
     static #formatBase64 = '0=[0-9a-zA-Z+/=]+' // image/png;base64,xxxxxxx のようにMIMEタイプを入れるべき？ とりま0xのように適当なプレフィクスで識別させる
     static #regexpBase64 = new RegExp(`^${this.#formatBase64}$`);
     /*

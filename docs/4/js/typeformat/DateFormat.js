@@ -1,4 +1,4 @@
-class DateFormat {
+export default class DateFormat {
     static #timeZone = 'Z'
     static #formatDate = '\\d{4,}[\-/]\\d{2}[\-/]\\d{2}';
     static #formatTime = '\\d{2}:\\d{2}(:\\d{2}(\.\\d+)?)?';

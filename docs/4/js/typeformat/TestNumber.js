@@ -1,4 +1,4 @@
-class TestNumber {
+export default class TestNumber {
     static test() {
         this.#testNew();
         this.#testNewZero();

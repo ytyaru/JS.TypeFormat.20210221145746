@@ -1,4 +1,5 @@
-class BigIntFormat {
+import IntegerFormat from './IntegerFormat.js';
+export default class BigIntFormat {
     static #formatBase10 = '[\-]?([0-9]{1}|[1-9][0-9]+)'
     static #formatBase8 = '0o[0-7]+'
     static #formatBase2 = '0b[01]+'

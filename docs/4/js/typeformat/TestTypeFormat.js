@@ -1,4 +1,11 @@
-class TestTypeFormat {
+import TypeFormat from './TypeFormat.js';
+import TestNumber from './TestNumber.js';
+import TestBigInt from './TestBigInt.js';
+import TestBase64 from './TestBase64.js';
+import TestIntegerFormat from './TestIntegerFormat.js';
+import TestFloatFormat from './TestFloatFormat.js';
+import TestDateFormat from './TestDateFormat.js';
+export default class TestTypeFormat {
     static test() {
         TestNumber.test();
         TestBigInt.test();

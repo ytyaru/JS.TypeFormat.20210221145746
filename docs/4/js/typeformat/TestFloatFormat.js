@@ -1,4 +1,5 @@
-class TestFloatFormat {
+import FloatFormat from './FloatFormat.js';
+export default class TestFloatFormat {
     static test() {
         this.#testIsMatch();
         this.#testToType();

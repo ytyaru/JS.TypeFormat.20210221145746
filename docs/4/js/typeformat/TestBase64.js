@@ -1,4 +1,4 @@
-class TestBase64 { // https://developer.mozilla.org/ja/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
+export default class TestBase64 { // https://developer.mozilla.org/ja/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
     static test() {
         const binary = 0xFF;
         /*

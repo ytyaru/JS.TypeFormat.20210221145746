@@ -1,4 +1,5 @@
-class TestIntegerFormat {
+import IntegerFormat from './IntegerFormat.js';
+export default class TestIntegerFormat {
     static test() {
         this.#testIsMatch();
         this.#testIsMatchFalse();
