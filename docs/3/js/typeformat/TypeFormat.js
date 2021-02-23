@@ -1,6 +1,4 @@
 class TypeFormat {
-    static #formatBase64 = '0=[0-9a-zA-Z+/=]+'
-    static #regexpBase64 = new RegExp(`^${this.#formatBase64}$`);
     // Infinity, NaN, 2e1 等はいらない
     static typeof(value) {
         if (undefined === value) { return 'undefined'; }
@@ -16,5 +14,18 @@ class TypeFormat {
         else if (BigIntFormat.isMatch(value)) { return 'bigint'; }
         else if (Base64Format.isMatch(value)) { return 'base64'; } // 実際はString型
         else { return 'string'; }
+    }
+    static toType(value) {
+        const type = this.typeof(value);
+        if ('undefined' === type) { return undefined; }
+        else if ('null' === type) { return null; }
+        else if ('NaN' === type) { return NaN; }
+        else if ('true' === value) { return true; }
+        else if ('false' === value) { return false; }
+        else if ('integer' === type) { return IntegerFormat.toType(value); }
+        else if ('float' === type) { return FloatFormat.toType(value); }
+        else if ('bigint' === type) { return BigIntFormat.toType(value); }
+        else if ('date' === type) { return DateFormat.toType(value); }
+        else { return value; }
     }
 }
