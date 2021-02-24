@@ -17,9 +17,25 @@ export default class TestUrlFormat {
             }
         }
     }
+    static #testIsMatch() {
+        console.assert(true === UrlFormat.isMatch('http://www.abc.com'));
+        console.assert(true === UrlFormat.isMatch('http://www.abc.com/'));
+        console.assert(true === UrlFormat.isMatch('http://www.abc.com/index.html'));
+        console.assert(true === UrlFormat.isMatch('http://www.abc.com/index.html#anchor'));
+        console.assert(true === UrlFormat.isMatch('http://www.abc.com/index.html?q=key%20word&key=value'));
+        console.assert(true === UrlFormat.isMatch('https://www.abc.com'));
+        console.assert(true === UrlFormat.isMatch('https://www.abc.com/'));
+        console.assert(true === UrlFormat.isMatch('https://www.abc.com/index.html'));
+        console.assert(true === UrlFormat.isMatch('https://www.abc.com/index.html#anchor'));
+        console.assert(true === UrlFormat.isMatch('https://www.abc.com/index.html?q=key%20word&key=value'));
+        console.assert(true === UrlFormat.isMatch('file:///tmp/index.html'));
+    }
+    static #testToType() {
+
+    }
     static #assert(method, value) {
-        console.log(method, value, this.#getExpect(method), method(value))
-        console.assert(this.#getExpect(method, value) === method(value));
+        console.log(method, value, this.#getExpect(method, value), method(value))
+        console.assert(this.#getExpect(method, value) == method(value));
     }
     static #getExpect(method, value) {
 //        console.log(value);
