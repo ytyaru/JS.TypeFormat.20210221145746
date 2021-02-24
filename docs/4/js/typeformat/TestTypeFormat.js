@@ -31,6 +31,7 @@ export default class TestTypeFormat {
         this.#testToTypeFloat();
 //        this.#testToTypeNumber();
         this.#testToTypeDate();
+        this.#testToTypeUrl();
         this.#testToTypeString();
         console.log('Finished assert !!');
     }
@@ -198,7 +199,17 @@ export default class TestTypeFormat {
         console.assert(Date.parse(`${yearUTC}-${monthUTC}-${dayUTC}T12:34:56.789Z`) === TypeFormat.toType('12:34:56.789').getTime());
     }
     static #testToTypeUrl() {
-
+        for (const protocol of ['http', 'https']) {
+            for (const url of [
+                `${protocol}://abc.com`,
+                `${protocol}://abc.com/`,
+                `${protocol}://abc.com/index.html`,
+                `${protocol}://abc.com/index.html#anchor`,
+                `${protocol}://abc.com/index.html?q=key%20word&key=value`
+            ]) {
+                console.assert(new URL(url).toString() === TypeFormat.toType(url).toString());
+            }
+        }
     }
     static #testToTypeString() {
         console.assert('2e1' === TypeFormat.toType('2e1')); // 2 * 10^1 = 20
