@@ -19,9 +19,18 @@ export default class TestUrlFormat {
         console.assert(new URL(value).toString() === UrlFormat.toType(value).toString());
     }
     static #assert(method, value) {
-        console.assert(0.0 === UrlFormat.toType('.0'));
+        console.assert(this.#getExpect(method) === method(value));
+    }
+    static #getExpect(method) {
+        if (method === UrlFormat.isMatch) { return true; }
+        else if (method === UrlFormat.toType) { return new URL(value).toString(); }
     }
     static #testToType() {
+        for (const url of [
+            ''
+        ]) {
+            
+        }
         console.assert(0.0 === UrlFormat.toType('.0'));
         console.assert(0.0 === UrlFormat.toType('0.0'));
         console.assert(12.34 === UrlFormat.toType('12.34'));
