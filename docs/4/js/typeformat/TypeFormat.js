@@ -2,6 +2,7 @@ import IntegerFormat from './IntegerFormat.js';
 import FloatFormat from './FloatFormat.js';
 import BigIntFormat from './BigIntFormat.js';
 import DateFormat from './DateFormat.js';
+import UrlFormat from './UrlFormat.js';
 import Base64Format from './Base64Format.js';
 export default class TypeFormat {
     // Infinity, NaN, 2e1 等はいらない

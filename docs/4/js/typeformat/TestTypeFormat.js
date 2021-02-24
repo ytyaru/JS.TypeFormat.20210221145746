@@ -5,6 +5,7 @@ import TestBase64 from './TestBase64.js';
 import TestIntegerFormat from './TestIntegerFormat.js';
 import TestFloatFormat from './TestFloatFormat.js';
 import TestDateFormat from './TestDateFormat.js';
+import TestUrlFormat from './TestUrlFormat.js';
 export default class TestTypeFormat {
     static test() {
         TestNumber.test();
@@ -13,6 +14,7 @@ export default class TestTypeFormat {
         TestIntegerFormat.test();
         TestFloatFormat.test();
         TestDateFormat.test();
+        TestUrlFormat.test();
         this.#testTypeOfLiteral();
         this.#testTypeOfBoolean();
         this.#testTypeOfInteger();
