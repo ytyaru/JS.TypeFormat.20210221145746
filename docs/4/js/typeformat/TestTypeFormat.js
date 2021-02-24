@@ -22,6 +22,7 @@ export default class TestTypeFormat {
         this.#testTypeOfFloat();
 //        this.#testTypeOfNumber();
         this.#testTypeOfDate();
+        this.#testTypeOfUrl();
         this.#testTypeOfString();
         this.#testToTypeLiteral();
         this.#testToTypeBoolean();
@@ -103,6 +104,19 @@ export default class TestTypeFormat {
         console.assert('date' === TypeFormat.typeof('12:34:56'));
         console.assert('date' === TypeFormat.typeof('12:34:56.789'));
     }
+    static #testTypeOfUrl() {
+        console.assert('url' === TypeFormat.typeof('http://www.abc.com'));
+        console.assert('url' === TypeFormat.typeof('http://www.abc.com/'));
+        console.assert('url' === TypeFormat.typeof('http://www.abc.com/index.html'));
+        console.assert('url' === TypeFormat.typeof('http://www.abc.com/index.html#anchor'));
+        console.assert('url' === TypeFormat.typeof('http://www.abc.com/index.html?q=key%20word&key=value'));
+        console.assert('url' === TypeFormat.typeof('https://www.abc.com'));
+        console.assert('url' === TypeFormat.typeof('https://www.abc.com/'));
+        console.assert('url' === TypeFormat.typeof('https://www.abc.com/index.html'));
+        console.assert('url' === TypeFormat.typeof('https://www.abc.com/index.html#anchor'));
+        console.assert('url' === TypeFormat.typeof('https://www.abc.com/index.html?q=key%20word&key=value'));
+        console.assert('url' === TypeFormat.typeof('file:///tmp/index.html'));
+    }
     static #testTypeOfString() {
         console.assert('string' === TypeFormat.typeof('2e1')); // 2 * 10^1 = 20
         console.assert('string' === TypeFormat.typeof('Infinity'));
@@ -182,6 +196,9 @@ export default class TestTypeFormat {
         const day = `0${now.getDate()}`.slice(-2);
         console.assert(Date.parse(`${yearUTC}-${monthUTC}-${dayUTC}T12:34:56Z`) === TypeFormat.toType('12:34:56').getTime());
         console.assert(Date.parse(`${yearUTC}-${monthUTC}-${dayUTC}T12:34:56.789Z`) === TypeFormat.toType('12:34:56.789').getTime());
+    }
+    static #testToTypeUrl() {
+
     }
     static #testToTypeString() {
         console.assert('2e1' === TypeFormat.toType('2e1')); // 2 * 10^1 = 20

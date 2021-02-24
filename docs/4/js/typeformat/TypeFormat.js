@@ -3,7 +3,7 @@ import FloatFormat from './FloatFormat.js';
 import BigIntFormat from './BigIntFormat.js';
 import DateFormat from './DateFormat.js';
 import UrlFormat from './UrlFormat.js';
-import Base64Format from './Base64Format.js';
+//import Base64Format from './Base64Format.js';
 export default class TypeFormat {
     // Infinity, NaN, 2e1 等はいらない
     static typeof(value) {
@@ -18,7 +18,8 @@ export default class TypeFormat {
         }
         else if (FloatFormat.isMatch(value)) { return 'float'; }
         else if (BigIntFormat.isMatch(value)) { return 'bigint'; }
-        else if (Base64Format.isMatch(value)) { return 'base64'; } // 実際はString型
+        else if (UrlFormat.isMatch(value)) { return 'url'; }
+//        else if (Base64Format.isMatch(value)) { return 'base64'; } // 実際はString型
         else { return 'string'; }
     }
     static toType(value) {
@@ -32,6 +33,8 @@ export default class TypeFormat {
         else if ('float' === type) { return FloatFormat.toType(value); } // Number型。2**53-1
         else if ('bigint' === type) { return BigIntFormat.toType(value); }
         else if ('date' === type) { return DateFormat.toType(value); }
+        else if ('url' === type) { return UrlFormat.toType(value); }
+//        else if ('base64' === type) { return Base64Format.toType(value); } // 実際はString型
         else { return value; }
     }
 }
